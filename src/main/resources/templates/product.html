@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<title>Product 維護</title>
+<style type="text/css">
+	.fieldError{color:red;}
+</style>
+</head>
+<body>
+	
+	<div class="container my-2">
+	<div th:include="header::header"></div>
+		<h1>Product 維護</h1>
+		<form action="#" 
+			th:action="@{/product/}"
+			th:object="${product}"
+			th:method="${_method}">
+			
+			<div class="form_group">
+			<!-- 隱藏欄位 -->
+			<input type="hidden" th:field="*{id}" />
+				<label for="name" >商品名稱</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}"></span>
+				<input type="text" th:field="*{name}" class="form-control"/>
+				
+				<input type="hidden" th:field="*{id}" />
+				<label for="cost" >成本</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{cost}')}" th:errors="*{cost}"></span>
+				<input type="text" th:field="*{cost}" class="form-control"/>
+				
+				<input type="hidden" th:field="*{id}" />
+				<label for="price" >定價</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{price}')}" th:errors="*{price}"></span>
+				<input type="text" th:field="*{price}" class="form-control"/>
+				
+				<input type="hidden" th:field="*{id}" />
+				<label for="unit" >單位</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{unit}')}" th:errors="*{unit}"></span>
+				<input type="text" th:field="*{unit}" class="form-control"/>
+				
+				<input type="hidden" th:field="*{id}" />
+				<label for="quantity" >最小訂購數量</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{quantity}')}" th:errors="*{quantity}"></span>
+				<input type="text" th:field="*{quantity}" class="form-control"/>
+				
+				<input type="hidden" th:field="*{id}" />
+				<label for="describe" >商品描述</label>
+					<span class="fieldError" th:if="${#fields.hasErrors('*{describe}')}" th:errors="*{describe}"></span>
+				<input type="text" th:field="*{describe}" class="form-control"/>
+				
+			</div>
+			<br>
+			<input type="submit" th:value="${_method}" class="btn btn-primary">
+		</form>
+		<p />
+		<h1>Product 列表</h1>
+		<table border="1" class ="table table-striped table-responsive-md">
+			
+			<thead>
+				<tr>
+					<th>序號</th>
+					<th>商品名稱</th>
+					<th>成本</th>
+					<th>定價</th>
+					<th>單位</th>
+					<th>最小訂購數量</th>
+					<th>商品描述</th>
+					<th>編輯</th>
+					<th>刪除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product:${products}">
+					<td th:text="${product.id}"></td>
+					<td th:text="${product.name}"></td>
+					<td th:text="${product.cost}"></td>
+					<td th:text="${product.price}"></td>
+					<td th:text="${product.unit}"></td>
+					<td th:text="${product.quantity}"></td>
+					<td th:text="${product.describe}"></td>
+					<td>
+						<a th:href="@{/product/{id}(id=${product.id})}">編輯</a>
+					</td>
+					<td>
+						<a th:href="@{/product/delete/{id}(id=${product.id})}">刪除</a>
+					</td>
+				</tr>
+				
+			</tbody>
+		
+		</table>
+	
+	
+	</div>
+	<div th:include="footer::footer"></div>
+
+</body>
+</html>
